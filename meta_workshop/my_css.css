@@ -1,0 +1,116 @@
+@import url(//db.onlinewebfonts.com/c/9897812c6013649bd7a0c3d2efb4c834?family=HK+Grotesk);
+
+/*TITLE SLIDE------------------------------------------*/
+.title-slide {
+  background-image: url('templates/KNBS_title.png');
+  background-size: cover;
+}
+
+.title-slide h1  {
+  color: white;
+  font-size: 56px;
+  text-shadow: none;
+  font-weight: 500;
+  text-align: center;
+  margin-left: 15px;
+  padding-top: 435px;
+}
+
+/*AGENDA SLIDE------------------------------------------*/
+
+.agenda {
+  background-image: url('templates/KNBS_agenda.png');
+  background-size: cover;
+}
+
+.agenda h1  {
+  color: #23373b;
+  font-size: 42px;
+  text-shadow: none;
+  font-weight: 500;
+  margin-left: 25px;
+  padding-top: 300px;
+}
+
+
+/*TRANSITION SLIDE------------------------------------------*/
+
+.transition {
+  background-image: url('templates/KNBS_transition.png');
+  background-size: cover;
+}
+
+.transition h1 {
+  padding-top: 335px;
+  text-align: center;
+  color: #8b0e3a;
+  font-weight: 500;
+  font-size: 72px;
+}
+
+/*UTILS------------------------------------------*/
+
+blockquote {
+    border-left: solid 5px #eb8421;
+}
+
+.footnote {
+  font-style: italic;
+  font-size: 15px;
+}
+
+.pull-left {
+  float: left;
+  top: 50%;
+  width: 40%;
+  margin: auto;
+}
+
+.pull-left70 {
+  float: left;
+  width: 70%;
+}
+
+.pull-left60 {
+  float: left;
+  width: 60%;
+}
+
+.pull-right {
+  float: right;
+  top: 50%;
+  width: 50%;
+  margin: auto;
+}
+
+.pull-right40 {
+  float: right;
+  width: 40%;
+}
+
+.pull-right60 {
+  float: right;
+  width: 60%;
+}
+
+.pull-right30 {
+  float: right;
+  width: 30%;
+}
+
+.no_number .remark-slide-number {
+  display: none;
+}
+
+ul {
+  text-align: left;
+}
+
+.large { 
+  font-size: 130% 
+}
+
+.small h1{ 
+  font-size: 35px
+}
+.tiny { font-size: 50% }
