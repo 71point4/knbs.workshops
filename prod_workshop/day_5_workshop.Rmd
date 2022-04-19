@@ -1,0 +1,71 @@
+---
+pagetitle: "Affordable Housing Dashboard Project: Workshop"
+output: 
+  xaringan::moon_reader:
+    self_contained: yes
+    lib_dir: libs
+    seal: true
+    css: ['default', "gen_theme.css", "fonts_theme.css", "my_css.css", "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"]
+    nature: 
+      ratio: '16:9'
+      beforeInit: "macros.js"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=F}
+library(tidyverse)
+library(knitr)
+library(glue)
+library(emo)
+
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 6,
+  fig.height = 5,
+  fig.align='center',
+  # cache = TRUE
+  cache = FALSE
+  )
+
+# pagedown::chrome_print('Sessions/01-Intro/Slides/01-01-Intro.html')
+
+# Machines
+# t3.medium
+```
+
+
+
+```{r functions, include=F}
+emoji <- function(keyword){
+  candidates <- emo::ji_keyword[[keyword]]
+  name <- candidates[1]
+  return(emo::ji_name[[name]])
+}
+```
+
+
+class: clear, no_number, title-slide
+background-image: url(templates/KNBS_title.png)
+background-size: cover
+
+# <br> KENYA AFFORDABLE HOUSING DATA PROJECT <br> <em> Technical Workshop </em> <br> Day 4
+
+---
+class: clear, agenda
+
+<!-- # 1) About Course <br> 2) Understanding Data Science Teams <br> 3) Software Requirements <br> 4) Something <br> 5) Something <br> 6) Something -->
+# 1) KNBS indicator coding
+
+---
+class: clear, no_number, transition, .small
+
+# KNBS indicator coding
+
+
+

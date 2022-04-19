@@ -1,3 +1,5 @@
+# Data
+prod_workshop/exercise/data/*
 # History files
 .Rhistory
 .Rapp.history

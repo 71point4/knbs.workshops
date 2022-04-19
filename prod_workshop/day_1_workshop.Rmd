@@ -1,0 +1,631 @@
+---
+pagetitle: "Affordable Housing Dashboard Project: Workshop"
+output: 
+  xaringan::moon_reader:
+    self_contained: yes
+    lib_dir: libs
+    seal: true
+    css: ['default', "gen_theme.css", "fonts_theme.css", "my_css.css", "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"]
+    nature: 
+      ratio: '16:9'
+      beforeInit: "macros.js"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=F}
+library(tidyverse)
+library(knitr)
+library(glue)
+library(emo)
+
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 6,
+  fig.height = 5,
+  fig.align='center',
+  # cache = TRUE
+  cache = FALSE
+  )
+
+# pagedown::chrome_print('Sessions/01-Intro/Slides/01-01-Intro.html')
+
+# Machines
+# t3.medium
+```
+
+
+
+```{r functions, include=F}
+emoji <- function(keyword){
+  candidates <- emo::ji_keyword[[keyword]]
+  name <- candidates[1]
+  return(emo::ji_name[[name]])
+}
+```
+
+
+class: clear, no_number, title-slide
+background-image: url(templates/KNBS_title.png)
+background-size: cover
+
+# <br> KENYA AFFORDABLE HOUSING DATA PROJECT <br> <em> Technical Workshop: Day 1
+
+---
+class: clear, agenda
+
+<!-- # 1) About Course <br> 2) Understanding Data Science Teams <br> 3) Software Requirements <br> 4) Something <br> 5) Something <br> 6) Something -->
+# 1) Introduction <br> 2) About this workshop <br> 3) RStudio setup <br> 4) Introduction to R <br> 5) Data manipulation <br> 6) Loops
+
+---
+class: clear, no_number, transition, .small
+
+# Introduction
+
+---
+class: .large
+# Who am I?
+
+.pull-left[
+
+* **Name** 
+> Abri de Beer
+
+* **Occupation** 
+> Data Scientist at 71point4
+
+* **Education** 
+> BEng from NWU <br> MEng from NWU <br> MIT from UP
+
+]
+
+.pull-right[
+
+* **Want to know more?**
+> Have a look at my LinkedIn: www.linkedin.com/in/abridebeer
+
+<br>
+
+![:scale 40%](images/Abri_Photo.jpg)
+]
+
+---
+class: clear, no_number, transition
+
+# About this workshop
+
+---
+class: .large
+# What this workshop aims to achieve
+
+* Upskill all participants to understand code used in the data pipeline 
+> **The training only aims to serve as a foundation for participants R coding journey**
+
+* Familiarisation with data pipeline
+> **Although not all of the participants will be working on the data pipeline on a day to day basis, understanding what happens in the pipeline is of great value to all people involved**
+
+---
+class: .large
+
+# Key outcomes
+
+.pull-left[
+
+Following the workshop, we want the KNBS team to:
+
+* Have a basic understanding of the **R code** used in the data pipeline
+
+* Understand the **flow** of the data pipeline
+
+* Be able to add **new indicators** to the data pipeline
+
+]
+
+<!-- We also encourage the following behaviour when it comes to completing the exercises: -->
+.pull-right[
+***PLEASE***:
+
+* Ask questions, we've been down this road before! `r emoji("nerd")`
+  
+]
+
+---
+class: .large
+
+# Asking for assistance
+.pull-left[
+<br>
+<br>
+![:scale 70%](https://media.giphy.com/media/WxIXZWVuZFRmlgwu8b/giphy.gif)
+]
+
+.pull-right[
+<br>
+<br>
+* Please feel free to stop me and ask a question
+
+* If you feel more comfortable asking questions in writing feel free to email them to **abri@71point4.com**
+
+* Please remain `r emoji("shushing_face")` when not asking a question
+]
+
+<!-- ![:scale 35%](https://media.giphy.com/media/P8X4lemg5Iphe/giphy.gif) -->
+
+
+---
+class: clear, no_number, transition
+
+# RStudio setup
+
+---
+class: .large
+
+# Installing RStudio
+
+* RStudio on your computer - [installation instructions](https://www.rstudio.com/products/rstudio/download/)
+
+<br>
+![:scale 50%](images/R_download_screen.png)
+
+---
+class: clear, no_number, transition, .small
+
+# Introduction to R
+
+---
+class: .large
+
+# Understanding the teminology
+
+* R vs RStudio
+> **R and RStudio are two distinctly different applications that serve different purposes. R is the software that performs the actual instructions. It’s the workhorse. Without R installed on your computer or server, you would not be able to run any commands. RStudio is a software that provides an nifty interface to R. It’s sometimes referred to as an Integrated Development Environment (IDE). Its purpose is to provide bells and whistles that can improve your experience with the R software.**
+
+<!-- Source: https://mgimond.github.io/ES218/R_vs_RStudio.html -->
+<br>
+<br>
+
+![:scale 30%](images/RStudio_to_R.png)
+---
+class: .large
+
+# Understanding the teminology
+
+* RStudio Desktop vs RStudio Server
+> **RStudio Desktop is an R IDE that works with the version of R you have installed on your local Windows, Mac OS X, or Linux workstation. RStudio Workbench and RStudio Server are Linux server applications that provide a web-browser-based interface to the version of R running on the server.**
+
+<!-- Source: https://support.rstudio.com/hc/en-us/articles/217799198-What-is-the-difference-between-RStudio-Desktop-RStudio-Workbench-and-RStudio-Server- -->
+
+<br>
+<br>
+
+![:scale 40%](images/RStudio-Alternative.jpg)
+
+---
+class: .large
+
+# Definitions
+
+* **Package**
+  * In R, the fundamental unit of shareable code is the package. A package bundles together code, data, documentation, and tests, and is easy to share with others. 
+  * Comprehensive R Archive Network, or **CRAN**, is the public clearing house for R packages.
+  
+<!-- Source: https://r-pkgs.org/intro.html- -->  
+<br>
+
+* **Pipe operator**
+  * The pipe operator is a special operational function available under the magrittr and dplyr package (basically developed under magrittr), which allows us to pass the result of one function/argument to the other one in sequence. It is generally denoted by symbol %>% in R Programming.
+
+<!-- Source: https://www.analyticssteps.com/blogs/using-pipe-operator-simplify-your-code-r-programming- -->
+
+---
+class: .large
+
+# Definitions
+
+* **Function**
+  * In R, a function is an object so the R interpreter is able to pass control to the function, along with arguments that may be necessary for the function to accomplish the actions
+
+<!-- Source: https://www.tutorialspoint.com/r/r_functions.htm#:~:text=In%20R%2C%20a%20function%20is,be%20stored%20in%20other%20objects. -->
+
+<br>
+
+* **Assign**
+  * To do useful and interesting things in R, we need to assign values to objects. To create an object, we need to give it a name followed by the assignment operator <-, and the value we want to give it.
+  
+<!-- Source: https://cengel.github.io/R-intro/gettingstarted.html -->
+
+---
+class: .large
+
+# Definitions
+
+* **Loop**
+  * A loop is a control statement that allows multiple executions of a statement or a set of statements. The word 'looping' means cycling or iterating.
+
+<!-- Source: https://www.geeksforgeeks.org/loops-in-r-for-while-repeat/#:~:text=In%20R%20programming%2C%20we%20require,looping'%20means%20cycling%20or%20iterating. -->
+
+<br>
+
+* **Apply**
+  * Apply functions are a family of functions in base R which allow you to repetitively perform an action on multiple chunks of data. An apply function is essentially a loop, but run faster than loops and often require less code.
+
+<!-- Source: https://ademos.people.uic.edu/Chapter4.html -->
+
+---
+class: .large
+
+# Definitions
+
+* **Map**
+  * The map functions transform their input by applying a function to each element of a list or atomic vector and returning an object of the same length as the input.
+
+<!-- Source: https://purrr.tidyverse.org/reference/map.html#:~:text=map.Rd,same%20type%20as%20the%20input. -->
+
+<br>
+
+* **Joins**
+  * We can merge two data frames in R by using the join of functions.
+  
+![:scale 35%](images/Joins_R.png)
+---
+class: .large
+
+# Definitions
+
+* **If statements**
+  * It is one of the easiest decision-making statements. It is used to decide whether a certain statement or block of statements will be executed or not i.e if a certain condition is true then a block of statement is executed otherwise not.
+  
+<!-- Source: https://www.geeksforgeeks.org/r-if-statement/#:~:text=It%20is%20one%20of%20the,execute%20if%20condition%20is%20true%20%7D -->  
+
+<br>
+
+* **Scripts**
+  * A script is simply a text file containing a set of commands and comments. The script can be saved and used later to re-execute the saved commands. The script can also be edited so you can execute a modified version of the commands.
+  
+<!-- Source: http://mercury.webster.edu/aleshunas/R_learning_infrastructure/R%20scripts.html -->  
+
+---
+class: .large
+
+# Projects in R
+
+* **What is a project?**
+  * A project is simply a working directory designated with a . RProj file. When you open a project (using File/Open Project in RStudio or by double–clicking on the . Rproj file outside of R), the working directory will automatically be set to the directory that the . RProj file is located in.
+  
+<!-- Source: https://bookdown.org/ndphillips/YaRrr/projects-in-rstudio.html -->  
+
+<br>
+
+* **Why use projects?**
+  * Using RStudio projects eliminates so much of the early-stage hassle and confusion around reading in and exporting data. Setting up a working directory properly also helps build up good habits that are conducive to reproducible analysis.
+  
+<!-- Source: https://www.r-bloggers.com/2020/01/rstudio-projects-and-working-directories-a-beginners-guide/ -->  
+
+
+![:scale 10%](images/project_setup.jpg)
+
+---
+class: clear, no_number, transition, .small
+
+# Data manipulation
+
+---
+class: .large
+
+# Data manipulation exercise 1
+
+* Use the data provided to answer the following question (data_manip_ex_1_data.csv):
+> **What is the average km/L achieved by cars with the same number cylinders.**
+
+* Sub questions:
+> **Rename miles per gallon (mpg) variable to kilometers per liter (kml)** <br> **Save answer as csv**
+
+* Variable description 
+![:scale 20%](images/mtcars_variables.png)
+
+---
+class: .large
+
+# Hints: Data manipulation exercise 1
+
+* **Reading csv**
+```{r,echo=T, eval=FALSE}
+
+test <- read_csv("path_to_file")
+
+```
+  
+* **Grouping**
+  
+```{r,echo=T, eval=FALSE}
+
+test_group <- test %>% 
+  group_by(vairible_name) %>% 
+  summarise(count_vairible_name = n()) %>% 
+  ungroup()
+
+```
+  
+---
+class: .large
+
+# Answer: Data manipulation exercise 1
+
+* **Step 1:** Loading packages
+
+```{r,echo=T, eval=FALSE}
+
+library(tidyverse)
+
+```
+
+* **Step 2:** Reading csv
+
+```{r,echo=T, eval=FALSE}
+
+mtcars <- read_csv("prod_workshop/excercise/data/data_manip_ex_1_data.csv")
+
+```
+
+
+* **Step 3:** Manipulating data
+
+```{r,echo=T, eval=FALSE}
+
+mtcars_manip <- mtcars %>% 
+  # Converting mpg to km/L
+  mutate(mpg = mpg * 0.425144) %>% 
+  # Renaming mpg to kml
+  rename(kml = mpg) %>%
+  # Select only model and kml variables
+  select(model,kml)
+
+```
+
+---
+class: .large
+
+# Answer: Data manipulation exercise 1
+
+* **Step 4:** Calculating averages
+
+```{r,echo=T, eval=FALSE}
+
+avg_kml <- mtcars_manip %>% 
+  # Group by cylinder count
+  group_by(cyl) %>% 
+  # Summarise and get average of kml per group
+  summarise(avg_kml = mean(kml)) %>%
+  ungroup()
+
+```
+
+* **Step 5:** Saving answer
+
+```{r,echo=T, eval=FALSE}
+
+write_csv(avg_kml,"prod_workshop/excercise/data/ans_data_manip_ex_1.csv")
+
+```
+
+---
+class: .large
+
+# Data manipulation exercise 2
+
+* Use the data provided to answer the following question (kchsp2020_annual_hh.dta):
+> **Of the households that could be found what is the average number of persons per dwelling per quarter in Mombasa.**
+
+* Sub questions:
+> **Save answer as csv**
+
+---
+class: .large
+
+# Hints: Data manipulation exercise 2
+
+* **Reading .dta**
+
+```{r,echo=T, eval=FALSE}
+
+library(haven)
+
+test <- read_dta("path_to_file") %>% 
+    as_factor() %>% 
+  mutate(across(where(is.factor), as.character))
+
+```
+
+* **Filter**
+
+```{r,echo=T, eval=FALSE}
+
+test <- test %>% 
+  filter(vairible_name == "test")
+
+```
+
+---
+class: .large
+
+# Anwers: Data manipulation exercise 2
+
+* **Step 1:** Loading packages
+
+```{r,echo=T, eval=FALSE}
+
+library(tidyverse)
+library(haven)
+
+```
+
+* **Step 2:** Reading .dta
+
+```{r,echo=T, eval=FALSE}
+
+ken_hh <- read_dta("prod_workshop/excercise/data/kchsp2020_annual_hh.dta") %>% 
+  as_factor() %>% 
+  mutate(across(where(is.factor), as.character))
+
+```
+
+---
+class: .large
+
+# Anwers: Data manipulation exercise 2
+
+* **Step 3:** Manipulate data
+
+```{r,echo=T, eval=FALSE}
+ken_hh_manip <- ken_hh %>% 
+  # Filter to only look at households from Mombasa and where households could be found
+  filter(a01 == "Mombasa" & a11_1 == "Household found") %>% 
+  # Select variables to be used
+  select(qrt,a12,e01) %>% 
+  # Rename variables
+  rename(num_person_household = a12,
+         num_dwellings = e01)
+
+```
+
+---
+class: .large
+
+# Anwers: Data manipulation exercise 2
+
+* **Step 4:** Calculating averages
+
+```{r,echo=T, eval=FALSE}
+
+avg_num <- ken_hh_manip %>% 
+  # Group by quarter
+  group_by(qrt) %>% 
+  summarise(avg_pp_pd = mean(num_person_household/num_dwellings,na.rm = TRUE)) %>%
+  ungroup()
+
+```
+
+* **Step 5:** Saving answer
+
+```{r,echo=T, eval=FALSE}
+
+write_csv(avg_num,"prod_workshop/excercise/data/ans_data_manip_ex_2.csv")
+
+```
+
+---
+class: clear, no_number, transition, .small
+
+# Loops
+
+---
+class: .large
+
+# Understanding loops
+
+* Definition:
+> **A loop is a control statement that allows multiple executions of a statement or a set of statements. The word 'looping' means cycling or iterating.**
+
+* Structure of a diffrent loops (Graphical):
+![:scale 50%](images/Loops.png)
+---
+class: .large
+
+# Understanding loops
+
+* For loops in code:
+```{r,echo=T, eval=FALSE}
+
+for (i in 1:5) {
+  print(i)
+}
+
+```
+
+![:scale 50%](images/for_loop_joke.jpg)
+
+
+---
+class: .large
+
+# Loops exercise 1
+
+* Use the data provided to answer the following question (loops_ex_1_data.csv):
+> **Loop through data set and print the answer for Sepal.Length x Sepal.Width**
+
+* Advanced question:
+> **Loop through data set and print the answer for Sepal.Length x Sepal.Width but if answer is > 20 print "Out of bounds"**
+
+* Variable description 
+![:scale 20%](images/iris_with_labels.jpg)
+
+---
+class: .large
+
+# Answer: Loops exercise 1
+
+* **Step 1:** Loading packages
+
+```{r,echo=T, eval=FALSE}
+
+library(tidyverse)
+
+```
+
+* **Step 2:** Reading csv
+
+```{r,echo=T, eval=FALSE}
+
+iris <- read_csv("prod_workshop/excercise/data/loops_ex_1_data.csv")
+
+```
+
+* **Step 3:** Loop
+
+```{r,echo=T, eval=FALSE}
+
+for (i in 1:nrow(iris)) {
+  
+  output <- iris$Sepal.Length[i]*iris$Sepal.Width[i]
+  
+  print(output)
+  
+}
+
+```
+
+---
+class: .large
+
+# Answer: Loops exercise 1
+
+* **Step 4:** Advanced loop
+
+```{r,echo=T, eval=FALSE}
+
+for (i in 1:nrow(iris)) {
+  
+  output <- iris$Sepal.Length[i]*iris$Sepal.Width[i]
+  
+  if (output > 20) {
+    
+    output <- "Out of bounds"
+    
+  }
+  
+  print(output)
+  
+}
+
+```
+
+---
+class: clear, no_number, transition
+
+# Fin
+
