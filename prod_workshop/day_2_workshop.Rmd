@@ -72,7 +72,7 @@ class: .large
 # More about joins?
 
 * **Definition**
-  * We can merge two data frames in R by using the join of functions.
+  * We can merge two data frames in R by using the join functions.
   
 * **Different joins**
   * Natural join or Inner Join: To keep only rows that match from the data frames, specify the argument all=FALSE.
@@ -88,15 +88,28 @@ class: .large
 # More about joins?
 
 * **Joins vs binds**
-  * **Join** uses a conman id variable to combine two data sets.
+  * **Join** uses a common id variable to combine two data sets.
   * **Bind** does not make use of common id variable.
-    * Row bind = rbind()
-    * Coloum bind = cbind()
+    
+---
+class: .large
+# More about joins?    
+
+* Row bind = rbind()
+   
 <br>
     
-![:scale 20%](images/Row-binding.jpg)
- 
-![:scale 20%](images/column-binding.png)
+![:scale 50%](images/Row-binding.jpg)
+
+---
+class: .large
+# More about joins?
+
+* Column bind = cbind()
+
+<br>
+
+![:scale 60%](images/column-binding.png)
  
 
 ---
@@ -365,7 +378,7 @@ class: .large
   
 <br>
     
-![:scale 40%](images/functions.png)
+![:scale 35%](images/functions.png)
 
 ---
 class: .large
@@ -534,3 +547,7 @@ total_iris <- iris %>%
 
 ```
 
+---
+class: clear, no_number, transition
+
+# Fin

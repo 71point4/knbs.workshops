@@ -160,7 +160,7 @@ test <- dbGetQuery(conn, "SELECT * FROM mtcars")
 
 <br>
     
-![:scale 50%](images/database_funny.jpg)
+![:scale 45%](images/database_funny.jpg)
 
 
 ---
@@ -223,6 +223,7 @@ db_write_df <- function(df, table_name, db, type = "append"){
 
 ```
 
+---
 class: .large
 # Connecting using knbsDButils
 
@@ -259,7 +260,7 @@ class: clear, no_number, transition, .small
 
 ---
 class: .large
-# Itroduction to data managment
+# Introduction to data managment
 
 * **Data management definition**
   * Data Management is the development, execution, and supervision of plans, policies, programs, and practices that
@@ -329,4 +330,7 @@ class: .large
   5. Populate indicators using reworked data.
   6. Save data to database.
 
+---
+class: clear, no_number, transition
 
+# Fin
