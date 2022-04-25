@@ -2,7 +2,7 @@
 pagetitle: "Affordable Housing Dashboard Project: Workshop"
 output: 
   xaringan::moon_reader:
-    self_contained: false
+    self_contained: yes
     lib_dir: libs
     seal: true
     css: ['default', "gen_theme.css", "fonts_theme.css", "my_css.css", "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"]
@@ -274,6 +274,27 @@ class: .large
 Lastly, and most importantly, we want to write scripts that we can rerun at a later time.
 ![:scale 80%](images/rstudio_script.png)
 ---
+class: .large
+
+# Projects in R
+
+.pull-left[
+* **What is a project?**
+  * A project is simply a working directory designated with a `.RProj` file. When you open a project (using File/Open Project in RStudio or by double–clicking on the `.Rproj` file outside of R), the working directory will automatically be set to the directory that the `.RProj` file is located in.
+<!-- Source: https://bookdown.org/ndphillips/YaRrr/projects-in-rstudio.html -->  
+* **Why use projects?**
+  * Eliminates early-stage hassle and confusion around reading in and exporting data. Setting up a working directory properly also helps build up good habits that are conducive to reproducible analysis.
+  
+<!-- Source: https://www.r-bloggers.com/2020/01/rstudio-projects-and-working-directories-a-beginners-guide/ -->  
+]
+.pull-right[
+
+![:scale 50%](images/project_setup.jpg)
+]
+
+
+
+---
 class: large
 # Using Projects
 
@@ -454,26 +475,6 @@ class: .large
   * Comments in R  scripts are preceded by the `#` (pound/hastag) symbol
   
 <!-- Source: http://mercury.webster.edu/aleshunas/R_learning_infrastructure/R%20scripts.html -->  
-
----
-class: .large
-
-# Projects in R
-
-.pull-left[
-* **What is a project?**
-  * A project is simply a working directory designated with a `.RProj` file. When you open a project (using File/Open Project in RStudio or by double–clicking on the `.Rproj` file outside of R), the working directory will automatically be set to the directory that the `.RProj` file is located in.
-<!-- Source: https://bookdown.org/ndphillips/YaRrr/projects-in-rstudio.html -->  
-* **Why use projects?**
-  * Eliminates early-stage hassle and confusion around reading in and exporting data. Setting up a working directory properly also helps build up good habits that are conducive to reproducible analysis.
-  
-<!-- Source: https://www.r-bloggers.com/2020/01/rstudio-projects-and-working-directories-a-beginners-guide/ -->  
-]
-.pull-right[
-
-![:scale 50%](images/project_setup.jpg)
-]
-
 
 ---
 class: clear, no_number, transition, .small
